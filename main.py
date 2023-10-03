@@ -31,29 +31,13 @@ def clear_button():
     pdf_file_entry.delete(0, tk.END)
     dest_folder_entry.delete(0, tk.END)
 
-# Função para limpar as siglas do RG
-def clean_rg(rg_pdf, user_input_rg):
-    # Remove caracteres indesejados da entrada do usuário
-    user_input_rg = re.sub(r'[^0-9a-zA-Z\s/.-]', '', user_input_rg)
-    cleaned_rg = ""
-    rg_parts = rg_pdf.split()
-    user_input_parts = user_input_rg.split()
-
-    # Itera sobre as partes do RG do PDF e compara com a entrada do usuário
-    for part in rg_parts:
-        if any(part.startswith(prefix) for prefix in user_input_parts):
-            cleaned_rg += part + " "
-        elif re.sub(r'\D', '', part) in user_input_parts:
-            cleaned_rg += part + " "
-
-    return cleaned_rg.strip()
-
-# Função para realizar a máscara de CPF e RG
+# Função principal para mascarar dados
 def mask():
     global cpf_enabled, rg_enabled
     cpf = cpf_entry.get()
     rg = rg_entry.get()
 
+    # Verificações iniciais
     if not cpf_enabled and not rg_enabled:
         messagebox.showerror("Erro", "Por favor, selecione pelo menos CPF ou RG.")
         return  # Não continue se ambos estiverem desativados
@@ -67,10 +51,13 @@ def mask():
     achouRG = False
     mensagem = []
 
+    # Remove caracteres não numéricos do CPF e RG fornecidos
     cpf_digitos = re.sub(r'\D', '', cpf)
+    rg_cleaned = re.sub(r'\D', '', rg)
 
+    # Processa CPF
     if cpf_enabled and cpf:
-        cpf_pattern = re.compile(r'[\d\s.-]+')
+        cpf_pattern = re.compile(r'CPF\s*n[°ºº.]*\s*([\d]{3}[-.\s]?[\d]{3}[-.\s]?[\d]{3}[-.\s]?\s?[\d]{2})')
         for page in doc:
             text = page.get_text()
             cpf_matches = cpf_pattern.findall(text)
@@ -87,19 +74,16 @@ def mask():
                     mensagem.append("CPF removido com sucesso.")
                     cpf_entry.delete(0, tk.END)
 
-    rg_digitos = re.sub(r'[^0-9a-zA-Z\s/.-]', '', rg)
-
+    # Processa RG
     if rg_enabled and rg:
-        rg_pattern = re.compile(r'[0-9a-zA-Z\s/.-]+')
+        rg_pattern = re.compile(r'RG\s*n[°ºº.]*\s*((?:[A-Z]+\s*)?[-.\s]?\s*[\d.-]+(?:\s*[–-]\s*[A-Z/]+[A-Z/]+)?)')
         for page in doc:
             text = page.get_text()
             rg_matches = rg_pattern.findall(text)
 
             for match in rg_matches:
-                rg_pdf = re.sub(r'[^0-9a-zA-Z\s/.-]', '', match)
-                cleaned_rg = clean_rg(rg_pdf, rg)
-                
-                if cleaned_rg == rg_digitos:
+                rg_pdf = re.sub(r'\D', '', match)
+                if rg_pdf == rg_cleaned:
                     rect = page.search_for(match)
                     for r in rect:
                         a = page.add_redact_annot(r, fill=(0, 0, 0))
@@ -109,6 +93,7 @@ def mask():
                     mensagem.append("RG removido com sucesso.")
                     rg_entry.delete(0, tk.END)
 
+    # Exibe mensagens de resultado
     if mensagem:
         mensagem_final = []
         if achouCPF:
@@ -143,7 +128,7 @@ def select_destination_folder():
 # Criação da interface gráfica usando Tkinter
 root = tk.Tk()
 root.title("Mascarar LGPD")
-root.geometry("650x250")
+root.geometry("650x250")  
 
 # Rótulo do título
 title_label = tk.Label(root, text="Mascarar LGPD")
