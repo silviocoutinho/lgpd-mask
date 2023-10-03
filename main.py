@@ -8,37 +8,37 @@ import re
 caminhoArquivo = ""
 destino = ""
 
-# Variáveis globais para controlar se CPF e RG estão habilitados
-cpf_enabled = True
-rg_enabled = True
+# Variáveis globais para controlar se CPF e RG estão ativos
+cpfAtivo = True
+rgAtivo = True
 
-# Função para alternar a habilitação do campo CPF
-def toggle_cpf():
-    global cpf_enabled
-    cpf_enabled = not cpf_enabled
-    cpf_entry.config(state=tk.NORMAL if cpf_enabled else tk.DISABLED)
+# Função para ativar o campo CPF
+def ativarCPF():
+    global cpfAtivo
+    cpfAtivo = not cpfAtivo
+    entradaCPF.config(state=tk.NORMAL if cpfAtivo else tk.DISABLED)
 
-# Função para alternar a habilitação do campo RG
-def toggle_rg():
-    global rg_enabled
-    rg_enabled = not rg_enabled
-    rg_entry.config(state=tk.NORMAL if rg_enabled else tk.DISABLED)
+# Função para ativar o campo RG
+def ativarRG():
+    global rgAtivo
+    rgAtivo = not rgAtivo
+    entradaRG.config(state=tk.NORMAL if rgAtivo else tk.DISABLED)
 
 # Função para limpar os campos de entrada
-def clear_button():
-    cpf_entry.delete(0, tk.END)
-    rg_entry.delete(0, tk.END)
-    pdf_file_entry.delete(0, tk.END)
-    dest_folder_entry.delete(0, tk.END)
+def limparCampos():
+    entradaCPF.delete(0, tk.END)
+    entradaRG.delete(0, tk.END)
+    entradaArquivoPDF.delete(0, tk.END)
+    entradaPastaDestino.delete(0, tk.END)
 
 # Função principal para mascarar dados
-def mask():
-    global cpf_enabled, rg_enabled
-    cpf = cpf_entry.get()
-    rg = rg_entry.get()
+def mascarar():
+    global cpfAtivo, rgAtivo
+    cpf = entradaCPF.get()
+    rg = entradaRG.get()
 
     # Verificações iniciais
-    if not cpf_enabled and not rg_enabled:
+    if not cpfAtivo and not rgAtivo:
         messagebox.showerror("Erro", "Por favor, selecione pelo menos CPF ou RG.")
         return  # Não continue se ambos estiverem desativados
     elif not os.path.isfile(caminhoArquivo):
@@ -52,137 +52,137 @@ def mask():
     mensagem = []
 
     # Remove caracteres não numéricos do CPF e RG fornecidos
-    cpf_digitos = re.sub(r'\D', '', cpf)
-    rg_cleaned = re.sub(r'\D', '', rg)
+    cpfLimpo = re.sub(r'\D', '', cpf)
+    rgLimpo = re.sub(r'\D', '', rg)
 
     # Processa CPF
-    if cpf_enabled and cpf:
-        cpf_pattern = re.compile(r'CPF\s*n[°ºº.]*\s*([\d]{3}[-.\s]?[\d]{3}[-.\s]?[\d]{3}[-.\s]?\s?[\d]{2})')
-        for page in doc:
-            text = page.get_text()
-            cpf_matches = cpf_pattern.findall(text)
+    if cpfAtivo and cpf:
+        padraoCPF = re.compile(r'CPF\s*n[°ºº.]*\s*([\d]{3}[-.\s]?[\d]{3}[-.\s]?[\d]{3}[-.\s]?\s?[\d]{2})')
+        for pagina in doc:
+            texto = pagina.get_text()
+            cpfEncontrados = padraoCPF.findall(texto)
 
-            for match in cpf_matches:
-                cpf_pdf = re.sub(r'\D', '', match)
-                if cpf_pdf == cpf_digitos:
-                    rect = page.search_for(match)
-                    for r in rect:
-                        a = page.add_redact_annot(r, fill=(0, 0, 0))
-                        a.update()
-                        page.apply_redactions()
+            for encontrado in cpfEncontrados:
+                cpfPDF = re.sub(r'\D', '', encontrado)
+                if cpfPDF == cpfLimpo:
+                    retangulos = pagina.search_for(encontrado)
+                    for retangulo in retangulos:
+                        anotacao = pagina.add_redact_annot(retangulo, fill=(0, 0, 0))
+                        anotacao.update()
+                        pagina.apply_redactions()
                     achouCPF = True
                     mensagem.append("CPF removido com sucesso.")
-                    cpf_entry.delete(0, tk.END)
+                    entradaCPF.delete(0, tk.END)
 
     # Processa RG
-    if rg_enabled and rg:
-        rg_pattern = re.compile(r'RG\s*n[°ºº.]*\s*((?:[A-Z]+\s*)?[-.\s]?\s*[\d.-]+(?:\s*[–-]\s*[A-Z/]+[A-Z/]+)?)')
-        for page in doc:
-            text = page.get_text()
-            rg_matches = rg_pattern.findall(text)
+    if rgAtivo and rg:
+        padraoRG = re.compile(r'RG\s*n[°ºº.]*\s*((?:[A-Z]+\s*)?[-.\s]?\s*[\d.-]+(?:\s*[–-]\s*[A-Z/]+[A-Z/]+)?)')
+        for pagina in doc:
+            texto = pagina.get_text()
+            rgEncontrados = padraoRG.findall(texto)
 
-            for match in rg_matches:
-                rg_pdf = re.sub(r'\D', '', match)
-                if rg_pdf == rg_cleaned:
-                    rect = page.search_for(match)
-                    for r in rect:
-                        a = page.add_redact_annot(r, fill=(0, 0, 0))
-                        a.update()
-                        page.apply_redactions()
+            for encontrado in rgEncontrados:
+                rgPDF = re.sub(r'\D', '', encontrado)
+                if rgPDF == rgLimpo:
+                    retangulos = pagina.search_for(encontrado)
+                    for retangulo in retangulos:
+                        anotacao = pagina.add_redact_annot(retangulo, fill=(0, 0, 0))
+                        anotacao.update()
+                        pagina.apply_redactions()
                     achouRG = True
                     mensagem.append("RG removido com sucesso.")
-                    rg_entry.delete(0, tk.END)
+                    entradaRG.delete(0, tk.END)
 
     # Exibe mensagens de resultado
     if mensagem:
-        mensagem_final = []
+        mensagemFinal = []
         if achouCPF:
-            mensagem_final.append("CPF removido com sucesso.")
+            mensagemFinal.append("CPF removido com sucesso.")
         if achouRG:
-            mensagem_final.append("RG removido com sucesso.")
+            mensagemFinal.append("RG removido com sucesso.")
         
-        nome_arquivo_destino = os.path.basename(caminhoArquivo)
-        caminho_destino = os.path.join(destino, nome_arquivo_destino)
-        doc.save(caminho_destino)
+        nomeArquivoDestino = os.path.basename(caminhoArquivo)
+        caminhoDestino = os.path.join(destino, nomeArquivoDestino)
+        doc.save(caminhoDestino)
         
-        messagebox.showinfo("Sucesso", "\n".join(mensagem_final))
+        messagebox.showinfo("Sucesso", "\n".join(mensagemFinal))
     else:
         messagebox.showinfo("Informação", "Nenhum dado encontrado para remoção.")
 
 # Função para selecionar um arquivo PDF
-def select_pdf_file():
+def selecionarArquivoPDF():
     global caminhoArquivo
-    pdf_file_path = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
-    pdf_file_entry.delete(0, tk.END)
-    pdf_file_entry.insert(0, pdf_file_path)
-    caminhoArquivo = pdf_file_path
+    caminhoArquivoPDF = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
+    entradaArquivoPDF.delete(0, tk.END)
+    entradaArquivoPDF.insert(0, caminhoArquivoPDF)
+    caminhoArquivo = caminhoArquivoPDF
 
 # Função para selecionar uma pasta de destino
-def select_destination_folder():
+def selecionarPastaDestino():
     global destino
-    dest_folder_path = filedialog.askdirectory()
-    dest_folder_entry.delete(0, tk.END)
-    dest_folder_entry.insert(0, dest_folder_path)
-    destino = dest_folder_path
+    pastaDestino = filedialog.askdirectory()
+    entradaPastaDestino.delete(0, tk.END)
+    entradaPastaDestino.insert(0, pastaDestino)
+    destino = pastaDestino
 
 # Criação da interface gráfica usando Tkinter
-root = tk.Tk()
-root.title("Mascarar LGPD")
-root.geometry("650x250")  
+raiz = tk.Tk()
+raiz.title("Mascarar LGPD")
+raiz.geometry("650x250")  
 
 # Rótulo do título
-title_label = tk.Label(root, text="Mascarar LGPD")
-title_label.grid(row=0, column=0, columnspan=4, pady=(10, 5))
+rotuloTitulo = tk.Label(raiz, text="Mascarar LGPD")
+rotuloTitulo.grid(row=0, column=0, columnspan=4, pady=(10, 5))
 
 # Rótulo e campo de entrada para CPF
-cpf_label = tk.Label(root, text="CPF:")
-cpf_label.grid(row=1, column=0, sticky="w", padx=10, pady=5)
-cpf_entry = tk.Entry(root, width=40)
-cpf_entry.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+rotuloCPF = tk.Label(raiz, text="CPF:")
+rotuloCPF.grid(row=1, column=0, sticky="w", padx=10, pady=5)
+entradaCPF = tk.Entry(raiz, width=40)
+entradaCPF.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
 # Checkbox para habilitar/desabilitar CPF
-cpf_checkbox = tk.Checkbutton(root, text="Ativo", command=toggle_cpf)
-cpf_checkbox.grid(row=1, column=3, padx=10, pady=5)
-cpf_checkbox.select()
+checkboxCPF = tk.Checkbutton(raiz, text="Ativo", command=ativarCPF)
+checkboxCPF.grid(row=1, column=3, padx=10, pady=5)
+checkboxCPF.select()
 
 # Rótulo e campo de entrada para RG
-rg_label = tk.Label(root, text="RG:")
-rg_label.grid(row=2, column=0, sticky="w", padx=10, pady=5)
-rg_entry = tk.Entry(root, width=40)
-rg_entry.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+rotuloRG = tk.Label(raiz, text="RG:")
+rotuloRG.grid(row=2, column=0, sticky="w", padx=10, pady=5)
+entradaRG = tk.Entry(raiz, width=40)
+entradaRG.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
 # Checkbox para habilitar/desabilitar RG
-rg_checkbox = tk.Checkbutton(root, text="Ativo", command=toggle_rg)
-rg_checkbox.grid(row=2, column=3, padx=10, pady=5)
-rg_checkbox.select()
+checkboxRG = tk.Checkbutton(raiz, text="Ativo", command=ativarRG)
+checkboxRG.grid(row=2, column=3, padx=10, pady=5)
+checkboxRG.select()
 
 # Rótulo e campo de entrada para o arquivo PDF
-pdf_file_label = tk.Label(root, text="Arquivo PDF:")
-pdf_file_label.grid(row=3, column=0, sticky="w", padx=10, pady=5)
-pdf_file_entry = tk.Entry(root, width=40)
-pdf_file_entry.grid(row=3, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+rotuloArquivoPDF = tk.Label(raiz, text="Arquivo PDF:")
+rotuloArquivoPDF.grid(row=3, column=0, sticky="w", padx=10, pady=5)
+entradaArquivoPDF = tk.Entry(raiz, width=40)
+entradaArquivoPDF.grid(row=3, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
 # Botão para selecionar um arquivo PDF
-pdf_file_button = tk.Button(root, text="Selecionar", command=select_pdf_file)
-pdf_file_button.grid(row=3, column=3, pady=5)
+botaoArquivoPDF = tk.Button(raiz, text="Selecionar", command=selecionarArquivoPDF)
+botaoArquivoPDF.grid(row=3, column=3, pady=5)
 
 # Rótulo e campo de entrada para a pasta de destino
-dest_folder_label = tk.Label(root, text="Pasta de destino:")
-dest_folder_label.grid(row=4, column=0, sticky="w", padx=10, pady=5)
-dest_folder_entry = tk.Entry(root, width=40)
-dest_folder_entry.grid(row=4, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+rotuloPastaDestino = tk.Label(raiz, text="Pasta de destino:")
+rotuloPastaDestino.grid(row=4, column=0, sticky="w", padx=10, pady=5)
+entradaPastaDestino = tk.Entry(raiz, width=40)
+entradaPastaDestino.grid(row=4, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
 # Botão para selecionar uma pasta de destino
-dest_folder_button = tk.Button(root, text="Selecionar", command=select_destination_folder)
-dest_folder_button.grid(row=4, column=3, pady=5)
+botaoPastaDestino = tk.Button(raiz, text="Selecionar", command=selecionarPastaDestino)
+botaoPastaDestino.grid(row=4, column=3, pady=5)
 
 # Botão para mascarar os dados
-mask_button = tk.Button(root, text="Mascarar", command=mask, width=10)
-mask_button.grid(row=5, column=2, sticky="e", padx=10, pady=5)
+botaoMascarar = tk.Button(raiz, text="Mascarar", command=mascarar, width=10)
+botaoMascarar.grid(row=5, column=2, sticky="e", padx=10, pady=5)
 
 # Botão para limpar os campos de entrada
-clear_button = tk.Button(root, text="Limpar", command=clear_button, width=10)
-clear_button.grid(row=5, column=3, sticky="e", pady=5)
+botaoLimpar = tk.Button(raiz, text="Limpar", command=limparCampos, width=10)
+botaoLimpar.grid(row=5, column=3, sticky="e", pady=5)
 
 # Iniciar a interface gráfica
-root.mainloop()
+raiz.mainloop()
