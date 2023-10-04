@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import messagebox
 import os.path
 import mascararLGPD.pdf_mascarar as pdf_mascarar
 import gui
@@ -47,5 +47,12 @@ def mascarar():
         messagebox.showinfo("Informação", "Nenhum dado encontrado para remoção.")
 
 if __name__ == "__main__":
-    app = gui.create_app()
+    # Criar a janela principal
+    app = tk.Tk()
+    app.title("Mascarar LGPD")
+    app.geometry("650x250")
+
+    # Chamar a função para criar a interface gráfica a partir de gui.py
+    gui.create_gui(app)
+
     app.mainloop()
