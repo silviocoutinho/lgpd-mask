@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import os.path
 import mascararLGPD.pdf_mascarar as pdf_mascarar
+from undoRedo import UndoRedoManager
+
 
 def create_gui(app):
     caminho_arquivo = ""
@@ -63,6 +65,7 @@ def create_gui(app):
     rotulo_cpf = tk.Label(app, text="CPF:")
     rotulo_cpf.grid(row=1, column=0, sticky="w", padx=10, pady=5)
     entrada_cpf = tk.Entry(app, width=40)
+    undo_redo_cpf = UndoRedoManager(entrada_cpf)
     entrada_cpf.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
     checkbox_cpf = tk.Checkbutton(app, text="Ativo", command=ativar_cpf)
@@ -72,6 +75,7 @@ def create_gui(app):
     rotulo_rg = tk.Label(app, text="RG:")
     rotulo_rg.grid(row=2, column=0, sticky="w", padx=10, pady=5)
     entrada_rg = tk.Entry(app, width=40)
+    undo_redo_rg = UndoRedoManager(entrada_rg)
     entrada_rg.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
     checkbox_rg = tk.Checkbutton(app, text="Ativo", command=ativar_rg)
