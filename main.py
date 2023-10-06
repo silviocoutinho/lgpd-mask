@@ -41,10 +41,8 @@ def mascarar():
 
     resultado = pdf_mascarar.mascarar(caminho_arquivo, destino, cpf_ativo, rg_ativo, cpf, rg)
 
-    if resultado:
-        messagebox.showinfo("Sucesso", resultado)
-    else:
-        messagebox.showinfo("Informação", "Nenhum dado encontrado para remoção.")
+    messagebox.showinfo("Resultado", resultado)
+
 
 if __name__ == "__main__":
     # Criar a janela principal

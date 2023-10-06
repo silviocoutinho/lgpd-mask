@@ -26,7 +26,7 @@ def create_gui(app):
         entrada_pasta_destino.delete(0, tk.END)
 
     def mascarar():
-        nonlocal caminho_arquivo, destino, cpf_ativo, rg_ativo
+        nonlocal caminho_arquivo, destino, cpf_ativo, rg_ativo, entrada_cpf, entrada_rg
 
         cpf = entrada_cpf.get()
         rg = entrada_rg.get()
@@ -39,12 +39,9 @@ def create_gui(app):
             messagebox.showerror("Erro", "O arquivo selecionado não existe.")
             return
 
-        resultado = pdf_mascarar.mascarar(caminho_arquivo, destino, cpf_ativo, rg_ativo, cpf, rg)
+        resultado = pdf_mascarar.mascarar(caminho_arquivo, destino, cpf_ativo, rg_ativo, cpf, rg, entrada_cpf, entrada_rg)
 
-        if resultado:
-            messagebox.showinfo("Sucesso", resultado)
-        else:
-            messagebox.showinfo("Informação", "Nenhum dado encontrado para remoção.")
+        messagebox.showinfo("Resultado", resultado)
 
     def selecionar_arquivo_pdf():
         nonlocal caminho_arquivo
