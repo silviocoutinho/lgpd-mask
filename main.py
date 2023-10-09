@@ -9,27 +9,27 @@ destino = ""
 cpfAtivo = True
 rgAtivo = True
 
-def ativar_cpf():
+def ativarCpf():
     global cpfAtivo
     cpfAtivo = not cpfAtivo
-    gui.entrada_cpf.config(state=tk.NORMAL if cpfAtivo else tk.DISABLED)
+    gui.entradaCpf.config(state=tk.NORMAL if cpfAtivo else tk.DISABLED)
 
 def ativarRg():
     global rgAtivo
     rgAtivo = not rgAtivo
-    gui.entrada_rg.config(state=tk.NORMAL if rgAtivo else tk.DISABLED)
+    gui.entradaRg.config(state=tk.NORMAL if rgAtivo else tk.DISABLED)
 
-def limpar_campos():
-    gui.entrada_cpf.delete(0, tk.END)
-    gui.entrada_rg.delete(0, tk.END)
-    gui.entrada_arquivo_pdf.delete(0, tk.END)
-    gui.entrada_pasta_destino.delete(0, tk.END)
+def limparCampos():
+    gui.entradaCpf.delete(0, tk.END)
+    gui.entradaRg.delete(0, tk.END)
+    gui.entradaArquivoPdf.delete(0, tk.END)
+    gui.entradaPastaDestino.delete(0, tk.END)
 
 def mascarar():
     global caminhoArquivo, destino, cpfAtivo, rgAtivo
 
-    cpf = gui.entrada_cpf.get()
-    rg = gui.entrada_rg.get()
+    cpf = gui.entradaCpf.get()
+    rg = gui.entradaRg.get()
 
     if not cpfAtivo and not rgAtivo:
         messagebox.showerror("Erro", "Por favor, selecione pelo menos CPF ou RG.")

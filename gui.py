@@ -14,23 +14,23 @@ def create_gui(app):
     def ativarCpf():
         nonlocal cpfAtivo
         cpfAtivo = not cpfAtivo
-        entrada_cpf.config(state=tk.NORMAL if cpfAtivo else tk.DISABLED)
+        entradaCpf.config(state=tk.NORMAL if cpfAtivo else tk.DISABLED)
 
     def ativarRg():
         nonlocal rgAtivo
         rgAtivo = not rgAtivo
         entradaRg.config(state=tk.NORMAL if rgAtivo else tk.DISABLED)
 
-    def limpar_campos():
-        entrada_cpf.delete(0, tk.END)
+    def limparCampos():
+        entradaCpf.delete(0, tk.END)
         entradaRg.delete(0, tk.END)
         entradaArquivoPdf.delete(0, tk.END)
-        entrada_pasta_destino.delete(0, tk.END)
+        entradaPastaDestino.delete(0, tk.END)
 
     def mascarar():
-        nonlocal caminhoArquivo, destino, cpfAtivo, rgAtivo, entrada_cpf, entradaRg
+        nonlocal caminhoArquivo, destino, cpfAtivo, rgAtivo, entradaCpf, entradaRg
 
-        cpf = entrada_cpf.get()
+        cpf = entradaCpf.get()
         rg = entradaRg.get()
 
         if not cpfAtivo and not rgAtivo:
@@ -41,67 +41,67 @@ def create_gui(app):
             messagebox.showerror("Erro", "O arquivo selecionado não existe.")
             return
 
-        resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entrada_cpf, entradaRg)
+        resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, entradaRg)
 
         messagebox.showinfo("Resultado", resultado)
 
-    def selecionar_arquivo_pdf():
+    def selecionarArquivoPdf():
         nonlocal caminhoArquivo
         caminhoArquivoPdf = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
         entradaArquivoPdf.delete(0, tk.END)
         entradaArquivoPdf.insert(0, caminhoArquivoPdf)
         caminhoArquivo = caminhoArquivoPdf
 
-    def selecionar_pasta_destino():
+    def selecionarPastaDestino():
         nonlocal destino
-        pasta_destino = filedialog.askdirectory()
-        entrada_pasta_destino.delete(0, tk.END)
-        entrada_pasta_destino.insert(0, pasta_destino)
-        destino = pasta_destino
+        pastaDestino = filedialog.askdirectory()
+        entradaPastaDestino.delete(0, tk.END)
+        entradaPastaDestino.insert(0, pastaDestino)
+        destino = pastaDestino
 
-    rotulo_titulo = tk.Label(app, text="Mascarar LGPD")
-    rotulo_titulo.grid(row=0, column=0, columnspan=4, pady=(10, 5))
+    rotuloTitulo = tk.Label(app, text="Mascarar LGPD")
+    rotuloTitulo.grid(row=0, column=0, columnspan=4, pady=(10, 5))
 
-    rotulo_cpf = tk.Label(app, text="CPF:")
-    rotulo_cpf.grid(row=1, column=0, sticky="w", padx=10, pady=5)
-    entrada_cpf = tk.Entry(app, width=40)
-    undo_redo_cpf = UndoRedoManager(entrada_cpf)
-    entrada_cpf.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+    rotuloCpf = tk.Label(app, text="CPF:")
+    rotuloCpf.grid(row=1, column=0, sticky="w", padx=10, pady=5)
+    entradaCpf = tk.Entry(app, width=40)
+    undoRedoCpf = UndoRedoManager(entradaCpf)
+    entradaCpf.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    checkbox_cpf = tk.Checkbutton(app, text="Ativo", command=ativarCpf)
-    checkbox_cpf.grid(row=1, column=3, padx=10, pady=5)
-    checkbox_cpf.select()
+    checkboxCpf = tk.Checkbutton(app, text="Ativo", command=ativarCpf)
+    checkboxCpf.grid(row=1, column=3, padx=10, pady=5)
+    checkboxCpf.select()
 
-    rotulo_rg = tk.Label(app, text="RG:")
-    rotulo_rg.grid(row=2, column=0, sticky="w", padx=10, pady=5)
+    rotuloRg = tk.Label(app, text="RG:")
+    rotuloRg.grid(row=2, column=0, sticky="w", padx=10, pady=5)
     entradaRg = tk.Entry(app, width=40)
-    undo_redo_rg = UndoRedoManager(entradaRg)
+    undoRedoRg = UndoRedoManager(entradaRg)
     entradaRg.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    checkbox_rg = tk.Checkbutton(app, text="Ativo", command=ativarRg)
-    checkbox_rg.grid(row=2, column=3, padx=10, pady=5)
-    checkbox_rg.select()
+    checkboxRg = tk.Checkbutton(app, text="Ativo", command=ativarRg)
+    checkboxRg.grid(row=2, column=3, padx=10, pady=5)
+    checkboxRg.select()
 
-    rotulo_arquivo_pdf = tk.Label(app, text="Arquivo PDF:")
-    rotulo_arquivo_pdf.grid(row=3, column=0, sticky="w", padx=10, pady=5)
+    rotuloArquivoPdf = tk.Label(app, text="Arquivo PDF:")
+    rotuloArquivoPdf.grid(row=3, column=0, sticky="w", padx=10, pady=5)
     entradaArquivoPdf = tk.Entry(app, width=40)
     entradaArquivoPdf.grid(row=3, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    botao_arquivo_pdf = tk.Button(app, text="Selecionar", command=selecionar_arquivo_pdf)
-    botao_arquivo_pdf.grid(row=3, column=3, pady=5)
+    botaoArquivoPdf = tk.Button(app, text="Selecionar", command=selecionarArquivoPdf)
+    botaoArquivoPdf.grid(row=3, column=3, pady=5)
 
-    rotulo_pasta_destino = tk.Label(app, text="Pasta de destino:")
-    rotulo_pasta_destino.grid(row=4, column=0, sticky="w", padx=10, pady=5)
-    entrada_pasta_destino = tk.Entry(app, width=40)
-    entrada_pasta_destino.grid(row=4, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+    rotuloPastaDestino = tk.Label(app, text="Pasta de destino:")
+    rotuloPastaDestino.grid(row=4, column=0, sticky="w", padx=10, pady=5)
+    entradaPastaDestino = tk.Entry(app, width=40)
+    entradaPastaDestino.grid(row=4, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    botao_pasta_destino = tk.Button(app, text="Selecionar", command=selecionar_pasta_destino)
-    botao_pasta_destino.grid(row=4, column=3, pady=5)
+    botaoPastaDestino = tk.Button(app, text="Selecionar", command=selecionarPastaDestino)
+    botaoPastaDestino.grid(row=4, column=3, pady=5)
 
-    botao_mascarar = tk.Button(app, text="Mascarar", command=mascarar, width=10)
-    botao_mascarar.grid(row=5, column=2, sticky="e", padx=10, pady=5)
+    botaoMascarar = tk.Button(app, text="Mascarar", command=mascarar, width=10)
+    botaoMascarar.grid(row=5, column=2, sticky="e", padx=10, pady=5)
 
-    botao_limpar = tk.Button(app, text="Limpar", command=limpar_campos, width=10)
-    botao_limpar.grid(row=5, column=3, sticky="e", pady=5)
+    botaoLimpar = tk.Button(app, text="Limpar", command=limparCampos, width=10)
+    botaoLimpar.grid(row=5, column=3, sticky="e", pady=5)
 
     app.mainloop()
