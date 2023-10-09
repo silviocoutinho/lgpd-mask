@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import os.path
-import mascararLGPD.pdf_mascarar as pdf_mascarar
+import mascararDados.pdf_mascarar as pdf_mascarar
 import gui
 
 caminho_arquivo = ""
