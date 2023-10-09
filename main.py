@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox
 import os.path
-import mascararDados.pdf_mascarar as pdf_mascarar
+import mascararDados.mascararPdf as mascararPdf
 import gui
 
-caminho_arquivo = ""
+caminhoArquivo = ""
 destino = ""
 cpfAtivo = True
 rg_ativo = True
@@ -26,7 +26,7 @@ def limpar_campos():
     gui.entrada_pasta_destino.delete(0, tk.END)
 
 def mascarar():
-    global caminho_arquivo, destino, cpfAtivo, rg_ativo
+    global caminhoArquivo, destino, cpfAtivo, rg_ativo
 
     cpf = gui.entrada_cpf.get()
     rg = gui.entrada_rg.get()
@@ -35,11 +35,11 @@ def mascarar():
         messagebox.showerror("Erro", "Por favor, selecione pelo menos CPF ou RG.")
         return
 
-    if not os.path.isfile(caminho_arquivo):
+    if not os.path.isfile(caminhoArquivo):
         messagebox.showerror("Erro", "O arquivo selecionado não existe.")
         return
 
-    resultado = pdf_mascarar.mascarar(caminho_arquivo, destino, cpfAtivo, rg_ativo, cpf, rg)
+    resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rg_ativo, cpf, rg)
 
     messagebox.showinfo("Resultado", resultado)
 

@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import os.path
-import mascararDados.pdf_mascarar as pdf_mascarar
+import mascararDados.mascararPdf as mascararPdf
 from undoRedo import UndoRedoManager
 
 
 def create_gui(app):
-    caminho_arquivo = ""
+    caminhoArquivo = ""
     destino = ""
     cpfAtivo = True
     rg_ativo = True
@@ -24,11 +24,11 @@ def create_gui(app):
     def limpar_campos():
         entrada_cpf.delete(0, tk.END)
         entrada_rg.delete(0, tk.END)
-        entrada_arquivo_pdf.delete(0, tk.END)
+        entradaArquivoPdf.delete(0, tk.END)
         entrada_pasta_destino.delete(0, tk.END)
 
     def mascarar():
-        nonlocal caminho_arquivo, destino, cpfAtivo, rg_ativo, entrada_cpf, entrada_rg
+        nonlocal caminhoArquivo, destino, cpfAtivo, rg_ativo, entrada_cpf, entrada_rg
 
         cpf = entrada_cpf.get()
         rg = entrada_rg.get()
@@ -37,20 +37,20 @@ def create_gui(app):
             messagebox.showerror("Erro", "Por favor, selecione pelo menos CPF ou RG.")
             return
 
-        if not os.path.isfile(caminho_arquivo):
+        if not os.path.isfile(caminhoArquivo):
             messagebox.showerror("Erro", "O arquivo selecionado não existe.")
             return
 
-        resultado = pdf_mascarar.mascarar(caminho_arquivo, destino, cpfAtivo, rg_ativo, cpf, rg, entrada_cpf, entrada_rg)
+        resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rg_ativo, cpf, rg, entrada_cpf, entrada_rg)
 
         messagebox.showinfo("Resultado", resultado)
 
     def selecionar_arquivo_pdf():
-        nonlocal caminho_arquivo
-        caminho_arquivo_pdf = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
-        entrada_arquivo_pdf.delete(0, tk.END)
-        entrada_arquivo_pdf.insert(0, caminho_arquivo_pdf)
-        caminho_arquivo = caminho_arquivo_pdf
+        nonlocal caminhoArquivo
+        caminhoArquivoPdf = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
+        entradaArquivoPdf.delete(0, tk.END)
+        entradaArquivoPdf.insert(0, caminhoArquivoPdf)
+        caminhoArquivo = caminhoArquivoPdf
 
     def selecionar_pasta_destino():
         nonlocal destino
@@ -84,8 +84,8 @@ def create_gui(app):
 
     rotulo_arquivo_pdf = tk.Label(app, text="Arquivo PDF:")
     rotulo_arquivo_pdf.grid(row=3, column=0, sticky="w", padx=10, pady=5)
-    entrada_arquivo_pdf = tk.Entry(app, width=40)
-    entrada_arquivo_pdf.grid(row=3, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+    entradaArquivoPdf = tk.Entry(app, width=40)
+    entradaArquivoPdf.grid(row=3, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
     botao_arquivo_pdf = tk.Button(app, text="Selecionar", command=selecionar_arquivo_pdf)
     botao_arquivo_pdf.grid(row=3, column=3, pady=5)

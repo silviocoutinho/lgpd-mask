@@ -5,8 +5,8 @@ import re
 from .mascararCpf import removerCpf
 from .rg_mascarar import _remover_rg
 
-def mascarar(caminho_arquivo, destino, cpfAtivo, rg_ativo, cpf, rg, entradaCpf, entrada_rg):
-    doc = fitz.open(caminho_arquivo)
+def mascarar(caminhoArquivo, destino, cpfAtivo, rg_ativo, cpf, rg, entradaCpf, entrada_rg):
+    doc = fitz.open(caminhoArquivo)
     achouCpf = False
     achou_rg = False
     mensagem = []
@@ -34,9 +34,9 @@ def mascarar(caminho_arquivo, destino, cpfAtivo, rg_ativo, cpf, rg, entradaCpf, 
         mensagem.append("RG não foi encontrado.")    
 
     if achouCpf or achou_rg:
-        nome_arquivo_destino = os.path.basename(caminho_arquivo)
-        caminho_destino = os.path.join(destino, nome_arquivo_destino)
-        doc.save(caminho_destino)
+        arquivoDestino = os.path.basename(caminhoArquivo)
+        caminhoDestino = os.path.join(destino, arquivoDestino)
+        doc.save(caminhoDestino)
         return "\n".join(mensagem)
     else:
         return "\n".join(mensagem)
