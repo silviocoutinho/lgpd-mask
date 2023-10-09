@@ -7,17 +7,17 @@ import gui
 caminhoArquivo = ""
 destino = ""
 cpfAtivo = True
-rg_ativo = True
+rgAtivo = True
 
 def ativar_cpf():
     global cpfAtivo
     cpfAtivo = not cpfAtivo
     gui.entrada_cpf.config(state=tk.NORMAL if cpfAtivo else tk.DISABLED)
 
-def ativar_rg():
-    global rg_ativo
-    rg_ativo = not rg_ativo
-    gui.entrada_rg.config(state=tk.NORMAL if rg_ativo else tk.DISABLED)
+def ativarRg():
+    global rgAtivo
+    rgAtivo = not rgAtivo
+    gui.entrada_rg.config(state=tk.NORMAL if rgAtivo else tk.DISABLED)
 
 def limpar_campos():
     gui.entrada_cpf.delete(0, tk.END)
@@ -26,12 +26,12 @@ def limpar_campos():
     gui.entrada_pasta_destino.delete(0, tk.END)
 
 def mascarar():
-    global caminhoArquivo, destino, cpfAtivo, rg_ativo
+    global caminhoArquivo, destino, cpfAtivo, rgAtivo
 
     cpf = gui.entrada_cpf.get()
     rg = gui.entrada_rg.get()
 
-    if not cpfAtivo and not rg_ativo:
+    if not cpfAtivo and not rgAtivo:
         messagebox.showerror("Erro", "Por favor, selecione pelo menos CPF ou RG.")
         return
 
@@ -39,7 +39,7 @@ def mascarar():
         messagebox.showerror("Erro", "O arquivo selecionado não existe.")
         return
 
-    resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rg_ativo, cpf, rg)
+    resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg)
 
     messagebox.showinfo("Resultado", resultado)
 

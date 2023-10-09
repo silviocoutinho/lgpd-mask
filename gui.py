@@ -9,31 +9,31 @@ def create_gui(app):
     caminhoArquivo = ""
     destino = ""
     cpfAtivo = True
-    rg_ativo = True
+    rgAtivo = True
 
     def ativarCpf():
         nonlocal cpfAtivo
         cpfAtivo = not cpfAtivo
         entrada_cpf.config(state=tk.NORMAL if cpfAtivo else tk.DISABLED)
 
-    def ativar_rg():
-        nonlocal rg_ativo
-        rg_ativo = not rg_ativo
-        entrada_rg.config(state=tk.NORMAL if rg_ativo else tk.DISABLED)
+    def ativarRg():
+        nonlocal rgAtivo
+        rgAtivo = not rgAtivo
+        entradaRg.config(state=tk.NORMAL if rgAtivo else tk.DISABLED)
 
     def limpar_campos():
         entrada_cpf.delete(0, tk.END)
-        entrada_rg.delete(0, tk.END)
+        entradaRg.delete(0, tk.END)
         entradaArquivoPdf.delete(0, tk.END)
         entrada_pasta_destino.delete(0, tk.END)
 
     def mascarar():
-        nonlocal caminhoArquivo, destino, cpfAtivo, rg_ativo, entrada_cpf, entrada_rg
+        nonlocal caminhoArquivo, destino, cpfAtivo, rgAtivo, entrada_cpf, entradaRg
 
         cpf = entrada_cpf.get()
-        rg = entrada_rg.get()
+        rg = entradaRg.get()
 
-        if not cpfAtivo and not rg_ativo:
+        if not cpfAtivo and not rgAtivo:
             messagebox.showerror("Erro", "Por favor, selecione pelo menos CPF ou RG.")
             return
 
@@ -41,7 +41,7 @@ def create_gui(app):
             messagebox.showerror("Erro", "O arquivo selecionado não existe.")
             return
 
-        resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rg_ativo, cpf, rg, entrada_cpf, entrada_rg)
+        resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entrada_cpf, entradaRg)
 
         messagebox.showinfo("Resultado", resultado)
 
@@ -74,11 +74,11 @@ def create_gui(app):
 
     rotulo_rg = tk.Label(app, text="RG:")
     rotulo_rg.grid(row=2, column=0, sticky="w", padx=10, pady=5)
-    entrada_rg = tk.Entry(app, width=40)
-    undo_redo_rg = UndoRedoManager(entrada_rg)
-    entrada_rg.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+    entradaRg = tk.Entry(app, width=40)
+    undo_redo_rg = UndoRedoManager(entradaRg)
+    entradaRg.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    checkbox_rg = tk.Checkbutton(app, text="Ativo", command=ativar_rg)
+    checkbox_rg = tk.Checkbutton(app, text="Ativo", command=ativarRg)
     checkbox_rg.grid(row=2, column=3, padx=10, pady=5)
     checkbox_rg.select()
 
