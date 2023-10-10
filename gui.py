@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import os.path
 import mascararDados.mascararPdf as mascararPdf
-from undoRedo import UndoRedoManager
+from desfazerRefazer import desfazerRefazer
 
 
 def create_gui(app):
@@ -77,7 +77,7 @@ def create_gui(app):
     rotuloCpf = tk.Label(app, text="CPF:")
     rotuloCpf.grid(row=1, column=0, sticky="w", padx=10, pady=5)
     entradaCpf = tk.Entry(app, width=40)
-    undoRedoCpf = UndoRedoManager(entradaCpf)
+    desfazerRefazerCpf = desfazerRefazer(entradaCpf)
     entradaCpf.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
 # Checkbox para habilitar/desabilitar CPF
@@ -89,7 +89,7 @@ def create_gui(app):
     rotuloRg = tk.Label(app, text="RG:")
     rotuloRg.grid(row=2, column=0, sticky="w", padx=10, pady=5)
     entradaRg = tk.Entry(app, width=40)
-    undoRedoRg = UndoRedoManager(entradaRg)
+    desfazerRefazerRg = desfazerRefazer(entradaRg)
     entradaRg.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
 # Checkbox para habilitar/desabilitar RG
