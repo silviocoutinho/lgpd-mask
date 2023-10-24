@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import os.path
 import mascararDados.mascararPdf as mascararPdf
-from desfazerRefazer import desfazerRefazer
+from interfaceGrafica.desfazerRefazer import desfazerRefazer
 
 
 def create_gui(app):

@@ -1,5 +1,5 @@
 import tkinter as tk
-import gui
+import interfaceGrafica.gui as gui
 
 if __name__ == "__main__":
     app = tk.Tk()
