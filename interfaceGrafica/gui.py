@@ -1,27 +1,23 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox
-import os.path
-import mascararDados.mascararPdf as mascararPdf
-from interfaceGrafica.desfazerRefazer import desfazerRefazer
-
+from tkinter import filedialog
+from .desfazerRefazer import desfazerRefazer
+from interfaceGrafica.mascarar import mascarar
 
 def create_gui(app):
 
-    caminhoArquivo = ""
-    destino = ""
+    app.caminhoArquivoPdf = ""
+    app.pastaDestino = ""
 
-    cpfAtivo = True
-    rgAtivo = True
+    app.cpfAtivo = True
+    app.rgAtivo = True
 
     def ativarCpf():
-        nonlocal cpfAtivo
-        cpfAtivo = not cpfAtivo
-        entradaCpf.config(state=tk.NORMAL if cpfAtivo else tk.DISABLED)
+        app.cpfAtivo = not app.cpfAtivo
+        entradaCpf.config(state=tk.NORMAL if app.cpfAtivo else tk.DISABLED)
 
     def ativarRg():
-        nonlocal rgAtivo
-        rgAtivo = not rgAtivo
-        entradaRg.config(state=tk.NORMAL if rgAtivo else tk.DISABLED)
+        app.rgAtivo = not app.rgAtivo
+        entradaRg.config(state=tk.NORMAL if app.rgAtivo else tk.DISABLED)
 
     def limparCampos():
         entradaCpf.delete(0, tk.END)
@@ -29,37 +25,15 @@ def create_gui(app):
         entradaArquivoPdf.delete(0, tk.END)
         entradaPastaDestino.delete(0, tk.END)
 
-    def mascarar():
-        nonlocal caminhoArquivo, destino, cpfAtivo, rgAtivo, entradaCpf, entradaRg
-
-        cpf = entradaCpf.get()
-        rg = entradaRg.get()
-
-        if not cpfAtivo and not rgAtivo:
-            messagebox.showerror("Erro", "Por favor, selecione pelo menos CPF ou RG.")
-            return  
-
-        if not os.path.isfile(caminhoArquivo):
-            messagebox.showerror("Erro", "O arquivo selecionado não existe.")
-            return  
-
-        resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, entradaRg)
-
-        messagebox.showinfo("Resultado", resultado)
-
     def selecionarArquivoPdf():
-        nonlocal caminhoArquivo
-        caminhoArquivoPdf = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
+        app.caminhoArquivoPdf = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
         entradaArquivoPdf.delete(0, tk.END)
-        entradaArquivoPdf.insert(0, caminhoArquivoPdf)
-        caminhoArquivo = caminhoArquivoPdf
+        entradaArquivoPdf.insert(0, app.caminhoArquivoPdf)
 
     def selecionarPastaDestino():
-        nonlocal destino
-        pastaDestino = filedialog.askdirectory()
+        app.pastaDestino = filedialog.askdirectory()
         entradaPastaDestino.delete(0, tk.END)
-        entradaPastaDestino.insert(0, pastaDestino)
-        destino = pastaDestino
+        entradaPastaDestino.insert(0, app.pastaDestino)
 
     rotuloTitulo = tk.Label(app, text="Mascarar LGPD")
     rotuloTitulo.grid(row=0, column=0, columnspan=4, pady=(10, 5))
@@ -100,7 +74,7 @@ def create_gui(app):
     botaoPastaDestino = tk.Button(app, text="Selecionar", command=selecionarPastaDestino)
     botaoPastaDestino.grid(row=4, column=3, pady=5)
 
-    botaoMascarar = tk.Button(app, text="Mascarar", command=mascarar, width=10)
+    botaoMascarar = tk.Button(app, text="Mascarar", command=lambda:mascarar(app, app.caminhoArquivoPdf, app.pastaDestino, app.cpfAtivo, app.rgAtivo), width=10)
     botaoMascarar.grid(row=5, column=2, sticky="e", padx=10, pady=5)
 
     botaoLimpar = tk.Button(app, text="Limpar", command=limparCampos, width=10)
