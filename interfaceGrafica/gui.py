@@ -1,9 +1,9 @@
 import tkinter as tk
-from tkinter import filedialog
 from .desfazerRefazer import desfazerRefazer
 from interfaceGrafica.mascarar import mascarar
 from .selecionarArquivoPdf import selecionarArquivoPdf
 from .selecionarPastaDestino import selecionarPastaDestino
+from .ativarCpf import ativarCpf
 
 def create_gui(app):
 
@@ -13,9 +13,8 @@ def create_gui(app):
     app.cpfAtivo = True
     app.rgAtivo = True
 
-    def ativarCpf():
-        app.cpfAtivo = not app.cpfAtivo
-        entradaCpf.config(state=tk.NORMAL if app.cpfAtivo else tk.DISABLED)
+    def boxAtivarCpf():
+        ativarCpf(app, entradaCpf)
 
     def ativarRg():
         app.rgAtivo = not app.rgAtivo
@@ -42,7 +41,7 @@ def create_gui(app):
     desfazerRefazerCpf = desfazerRefazer(entradaCpf)
     entradaCpf.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    checkboxCpf = tk.Checkbutton(app, text="Ativo", command=ativarCpf)
+    checkboxCpf = tk.Checkbutton(app, text="Ativo", command=boxAtivarCpf)
     checkboxCpf.grid(row=1, column=3, padx=10, pady=5)
     checkboxCpf.select()
 
