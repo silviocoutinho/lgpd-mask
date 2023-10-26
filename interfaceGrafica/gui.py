@@ -4,6 +4,7 @@ from interfaceGrafica.mascarar import mascarar
 from .selecionarArquivoPdf import selecionarArquivoPdf
 from .selecionarPastaDestino import selecionarPastaDestino
 from .ativarCpf import ativarCpf
+from .ativarRg import ativarRg
 
 def create_gui(app):
 
@@ -16,9 +17,8 @@ def create_gui(app):
     def boxAtivarCpf():
         ativarCpf(app, entradaCpf)
 
-    def ativarRg():
-        app.rgAtivo = not app.rgAtivo
-        entradaRg.config(state=tk.NORMAL if app.rgAtivo else tk.DISABLED)
+    def boxAtivarRg():
+        ativarRg(app, entradaRg)
 
     def limparCampos():
         entradaCpf.delete(0, tk.END)
@@ -51,7 +51,7 @@ def create_gui(app):
     desfazerRefazerRg = desfazerRefazer(entradaRg)
     entradaRg.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    checkboxRg = tk.Checkbutton(app, text="Ativo", command=ativarRg)
+    checkboxRg = tk.Checkbutton(app, text="Ativo", command=boxAtivarRg)
     checkboxRg.grid(row=2, column=3, padx=10, pady=5)
     checkboxRg.select()
 
