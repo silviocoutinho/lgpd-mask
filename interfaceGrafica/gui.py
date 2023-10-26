@@ -1,10 +1,11 @@
 import tkinter as tk
 from .desfazerRefazer import desfazerRefazer
-from interfaceGrafica.mascarar import mascarar
+from .mascarar import mascarar
 from .selecionarArquivoPdf import selecionarArquivoPdf
 from .selecionarPastaDestino import selecionarPastaDestino
 from .ativarCpf import ativarCpf
 from .ativarRg import ativarRg
+from .limparCampos import limparCampos
 
 def create_gui(app):
 
@@ -20,11 +21,8 @@ def create_gui(app):
     def boxAtivarRg():
         ativarRg(app, entradaRg)
 
-    def limparCampos():
-        entradaCpf.delete(0, tk.END)
-        entradaRg.delete(0, tk.END)
-        entradaArquivoPdf.delete(0, tk.END)
-        entradaPastaDestino.delete(0, tk.END)
+    def botaoLimparCampos():
+        limparCampos(entradaCpf, entradaRg, entradaArquivoPdf, entradaPastaDestino)
 
     def selecionarPdf():
         selecionarArquivoPdf(app)
@@ -74,7 +72,7 @@ def create_gui(app):
     botaoMascarar = tk.Button(app, text="Mascarar", command=lambda:mascarar(app, app.caminhoArquivoPdf, app.pastaDestino, app.cpfAtivo, app.rgAtivo), width=10)
     botaoMascarar.grid(row=5, column=2, sticky="e", padx=10, pady=5)
 
-    botaoLimpar = tk.Button(app, text="Limpar", command=limparCampos, width=10)
+    botaoLimpar = tk.Button(app, text="Limpar", command=botaoLimparCampos, width=10)
     botaoLimpar.grid(row=5, column=3, sticky="e", pady=5)
 
     app.mainloop()
