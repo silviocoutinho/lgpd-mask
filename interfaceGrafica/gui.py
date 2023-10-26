@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 from .desfazerRefazer import desfazerRefazer
 from interfaceGrafica.mascarar import mascarar
+from .selecionarArquivoPdf import selecionarArquivoPdf
 
 def create_gui(app):
 
@@ -25,10 +26,8 @@ def create_gui(app):
         entradaArquivoPdf.delete(0, tk.END)
         entradaPastaDestino.delete(0, tk.END)
 
-    def selecionarArquivoPdf():
-        app.caminhoArquivoPdf = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
-        entradaArquivoPdf.delete(0, tk.END)
-        entradaArquivoPdf.insert(0, app.caminhoArquivoPdf)
+    def selecionarPdf():
+        selecionarArquivoPdf(app)
 
     def selecionarPastaDestino():
         app.pastaDestino = filedialog.askdirectory()
@@ -63,7 +62,7 @@ def create_gui(app):
     entradaArquivoPdf = tk.Entry(app, width=40)
     entradaArquivoPdf.grid(row=3, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    botaoArquivoPdf = tk.Button(app, text="Selecionar", command=selecionarArquivoPdf)
+    botaoArquivoPdf = tk.Button(app, text="Selecionar", command=selecionarPdf)
     botaoArquivoPdf.grid(row=3, column=3, pady=5)
 
     rotuloPastaDestino = tk.Label(app, text="Pasta de destino:")
