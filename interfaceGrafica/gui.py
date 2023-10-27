@@ -1,5 +1,4 @@
 import tkinter as tk
-from .funcoesAuxiliares.desfazerRefazer import desfazerRefazer
 from .funcoesAuxiliares.mascarar import mascarar
 from .funcoesAuxiliares.selecionarArquivoPdf import selecionarArquivoPdf
 from .funcoesAuxiliares.selecionarPastaDestino import selecionarPastaDestino
@@ -7,6 +6,7 @@ from .funcoesAuxiliares.ativarCpf import ativarCpf
 from .funcoesAuxiliares.ativarRg import ativarRg
 from .funcoesAuxiliares.limparCampos import limparCampos
 from .componentes.rotulo import criarRotulo
+from .componentes.campoTexto import criarCampoTexto
 
 def create_gui(app):
 
@@ -16,36 +16,30 @@ def create_gui(app):
     app.cpfAtivo = True
     app.rgAtivo = True
 
-    criarRotulo(app, "Mascarar LGPD", 0, 2, columnspan=4, pady=(10, 5))
+    criarRotulo(app, "Mascarar LGPD", 0, 2)
 
     criarRotulo(app, "CPF:", 1, 0)
-    entradaCpf = tk.Entry(app, width=40)
-    desfazerRefazerCpf = desfazerRefazer(entradaCpf)
-    entradaCpf.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+    entradaCpf = criarCampoTexto(app, 35, 1, 1)
 
     checkboxCpf = tk.Checkbutton(app, text="Ativo", command=lambda:ativarCpf(app, entradaCpf))
     checkboxCpf.grid(row=1, column=3, padx=10, pady=5)
     checkboxCpf.select()
 
     criarRotulo(app, "RG:", 2, 0)
-    entradaRg = tk.Entry(app, width=40)
-    desfazerRefazerRg = desfazerRefazer(entradaRg)
-    entradaRg.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+    entradaRg = criarCampoTexto(app, 35, 2, 1)
 
     checkboxRg = tk.Checkbutton(app, text="Ativo", command=lambda:ativarRg(app, entradaRg))
     checkboxRg.grid(row=2, column=3, padx=10, pady=5)
     checkboxRg.select()
 
     criarRotulo(app, "Arquivo PDF:", 3, 0)
-    entradaArquivoPdf = tk.Entry(app, width=40)
-    entradaArquivoPdf.grid(row=3, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+    entradaArquivoPdf = criarCampoTexto(app, 35, 3, 1)
 
     botaoArquivoPdf = tk.Button(app, text="Selecionar", command=lambda:selecionarArquivoPdf(app))
     botaoArquivoPdf.grid(row=3, column=3, pady=5)
 
     criarRotulo(app, "Pasta de destino:", 4, 0)
-    entradaPastaDestino = tk.Entry(app, width=40)
-    entradaPastaDestino.grid(row=4, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
+    entradaPastaDestino = criarCampoTexto(app, 35, 4, 1)
 
     botaoPastaDestino = tk.Button(app, text="Selecionar", command=lambda:selecionarPastaDestino(app))
     botaoPastaDestino.grid(row=4, column=3, pady=5)
