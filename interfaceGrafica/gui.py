@@ -6,6 +6,7 @@ from .funcoesAuxiliares.selecionarPastaDestino import selecionarPastaDestino
 from .funcoesAuxiliares.ativarCpf import ativarCpf
 from .funcoesAuxiliares.ativarRg import ativarRg
 from .funcoesAuxiliares.limparCampos import limparCampos
+from .componentes.rotulo import criarRotulo
 
 def create_gui(app):
 
@@ -15,11 +16,9 @@ def create_gui(app):
     app.cpfAtivo = True
     app.rgAtivo = True
 
-    rotuloTitulo = tk.Label(app, text="Mascarar LGPD")
-    rotuloTitulo.grid(row=0, column=0, columnspan=4, pady=(10, 5))
+    criarRotulo(app, "Mascarar LGPD", 0, 2, columnspan=4, pady=(10, 5))
 
-    rotuloCpf = tk.Label(app, text="CPF:")
-    rotuloCpf.grid(row=1, column=0, sticky="w", padx=10, pady=5)
+    criarRotulo(app, "CPF:", 1, 0)
     entradaCpf = tk.Entry(app, width=40)
     desfazerRefazerCpf = desfazerRefazer(entradaCpf)
     entradaCpf.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
@@ -28,8 +27,7 @@ def create_gui(app):
     checkboxCpf.grid(row=1, column=3, padx=10, pady=5)
     checkboxCpf.select()
 
-    rotuloRg = tk.Label(app, text="RG:")
-    rotuloRg.grid(row=2, column=0, sticky="w", padx=10, pady=5)
+    criarRotulo(app, "RG:", 2, 0)
     entradaRg = tk.Entry(app, width=40)
     desfazerRefazerRg = desfazerRefazer(entradaRg)
     entradaRg.grid(row=2, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
@@ -38,16 +36,14 @@ def create_gui(app):
     checkboxRg.grid(row=2, column=3, padx=10, pady=5)
     checkboxRg.select()
 
-    rotuloArquivoPdf = tk.Label(app, text="Arquivo PDF:")
-    rotuloArquivoPdf.grid(row=3, column=0, sticky="w", padx=10, pady=5)
+    criarRotulo(app, "Arquivo PDF:", 3, 0)
     entradaArquivoPdf = tk.Entry(app, width=40)
     entradaArquivoPdf.grid(row=3, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
     botaoArquivoPdf = tk.Button(app, text="Selecionar", command=lambda:selecionarArquivoPdf(app))
     botaoArquivoPdf.grid(row=3, column=3, pady=5)
 
-    rotuloPastaDestino = tk.Label(app, text="Pasta de destino:")
-    rotuloPastaDestino.grid(row=4, column=0, sticky="w", padx=10, pady=5)
+    criarRotulo(app, "Pasta de destino:", 4, 0)
     entradaPastaDestino = tk.Entry(app, width=40)
     entradaPastaDestino.grid(row=4, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
