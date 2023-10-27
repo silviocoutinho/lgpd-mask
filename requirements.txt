@@ -1,0 +1,4 @@
+python_requires='>=3.6'
+PyMuPDF==1.23.5
+PyMuPDFb==1.23.5
+tk==0.1.0
