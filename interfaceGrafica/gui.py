@@ -3,7 +3,7 @@ from .desfazerRefazer import desfazerRefazer
 from .mascarar import mascarar
 from .selecionarArquivoPdf import selecionarArquivoPdf
 from .selecionarPastaDestino import selecionarPastaDestino
-from .ativarCpf import ativarCpf
+from .funcoesAuxiliares.ativarCpf import ativarCpf
 from .ativarRg import ativarRg
 from .limparCampos import limparCampos
 
@@ -14,9 +14,6 @@ def create_gui(app):
 
     app.cpfAtivo = True
     app.rgAtivo = True
-
-    def boxAtivarCpf():
-        ativarCpf(app, entradaCpf)
 
     def boxAtivarRg():
         ativarRg(app, entradaRg)
@@ -39,7 +36,7 @@ def create_gui(app):
     desfazerRefazerCpf = desfazerRefazer(entradaCpf)
     entradaCpf.grid(row=1, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    checkboxCpf = tk.Checkbutton(app, text="Ativo", command=boxAtivarCpf)
+    checkboxCpf = tk.Checkbutton(app, text="Ativo", command=lambda:ativarCpf(app, entradaCpf))
     checkboxCpf.grid(row=1, column=3, padx=10, pady=5)
     checkboxCpf.select()
 
