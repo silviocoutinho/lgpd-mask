@@ -1,5 +1,5 @@
 import tkinter as tk
-from .desfazerRefazer import desfazerRefazer
+from .funcoesAuxiliares.desfazerRefazer import desfazerRefazer
 from .funcoesAuxiliares.mascarar import mascarar
 from .selecionarArquivoPdf import selecionarArquivoPdf
 from .selecionarPastaDestino import selecionarPastaDestino
