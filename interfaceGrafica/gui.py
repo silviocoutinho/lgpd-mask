@@ -19,33 +19,33 @@ def create_gui(app):
     app.cpfAtivo = True
     app.rgAtivo = True
 
-    criarRotulo(app, "Mascarar LGPD", 0, 2)
+    criarRotulo(app, "Mascarar LGPD", 0, 1, padx=100, columnspan=3, pady=(20, 10))
 
     criarRotulo(app, "CPF:", 1, 0)
-    entradaCpf = criarCampoTexto(app, 35, 1, 1)
-    criarCheckBox(app, "Ativo", 1, 3, lambda: ativarCpf(app, entradaCpf))
+    entradaCpf = criarCampoTexto(app, 40, 1, 1)
+    criarCheckBox(app, "Ativo", 1, 2, lambda: ativarCpf(app, entradaCpf))
     desfazerRefazer(entradaCpf)
 
     criarRotulo(app, "RG:", 2, 0)
-    entradaRg = criarCampoTexto(app, 35, 2, 1)
-    criarCheckBox(app, "Ativo", 2, 3, lambda: ativarRg(app, entradaRg))
+    entradaRg = criarCampoTexto(app, 40, 2, 1)
+    criarCheckBox(app, "Ativo", 2, 2, lambda: ativarRg(app, entradaRg))
     desfazerRefazer(entradaRg)
 
     criarRotulo(app, "Arquivo PDF:", 3, 0)
-    entradaArquivoPdf = criarCampoTexto(app, 35, 3, 1)
+    entradaArquivoPdf = criarCampoTexto(app, 40, 3, 1)
     desfazerRefazer(entradaArquivoPdf)
 
     criarRotulo(app, "Pasta de destino:", 4, 0)
-    entradaPastaDestino = criarCampoTexto(app, 35, 4, 1)
+    entradaPastaDestino = criarCampoTexto(app, 40, 4, 1)
     desfazerRefazer(entradaPastaDestino)
 
     botoes = [
-        {"text": "Selecionar", "command": lambda: selecionarArquivoPdf(app), "width": 10, "row": 3, "column": 3, "sticky": "", "padx": 0, "pady": 5},
-        {"text": "Selecionar", "command": lambda: selecionarPastaDestino(app), "width": 10, "row": 4, "column": 3, "sticky": "", "padx": 0, "pady": 5},
-        {"text": "Mascarar", "command": lambda: mascarar(app, app.caminhoArquivoPdf, app.pastaDestino, app.cpfAtivo, app.rgAtivo), "width": 10, "row": 5, "column": 2, "sticky": "e", "padx": 10, "pady": 5},
-        {"text": "Limpar", "command": lambda: limparCampos(entradaCpf, entradaRg, entradaArquivoPdf, entradaPastaDestino), "width": 10, "row": 5, "column": 3, "sticky": "e", "padx": 0, "pady": 5}
+        {"text": "Selecionar", "command": lambda: selecionarArquivoPdf(app), "width": 10, "row": 3, "column": 2, "sticky": "e", "padx": 5, "pady": 5},
+        {"text": "Selecionar", "command": lambda: selecionarPastaDestino(app), "width": 10, "row": 4, "column": 2, "sticky": "e", "padx": 5, "pady": 5},
+        {"text": "Mascarar", "command": lambda: mascarar(app, app.caminhoArquivoPdf, app.pastaDestino, app.cpfAtivo, app.rgAtivo), "width": 10, "row": 5, "column": 1, "sticky": "e", "padx": 10, "pady": 5},
+        {"text": "Limpar", "command": lambda: limparCampos(entradaCpf, entradaRg, entradaArquivoPdf, entradaPastaDestino), "width": 10, "row": 5, "column": 2, "sticky": "e", "padx": 5, "pady": 5}
     ]
 
-    botoesCriados = criarBotoes(app, botoes)
+    criarBotoes(app, botoes)
 
     app.mainloop()
