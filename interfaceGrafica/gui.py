@@ -1,6 +1,6 @@
 import tkinter as tk
 from .desfazerRefazer import desfazerRefazer
-from .mascarar import mascarar
+from .funcoesAuxiliares.mascarar import mascarar
 from .selecionarArquivoPdf import selecionarArquivoPdf
 from .selecionarPastaDestino import selecionarPastaDestino
 from .funcoesAuxiliares.ativarCpf import ativarCpf
@@ -14,9 +14,6 @@ def create_gui(app):
 
     app.cpfAtivo = True
     app.rgAtivo = True
-
-    def botaoLimparCampos():
-        limparCampos(entradaCpf, entradaRg, entradaArquivoPdf, entradaPastaDestino)
 
     def selecionarPdf():
         selecionarArquivoPdf(app)
