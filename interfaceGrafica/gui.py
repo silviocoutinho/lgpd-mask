@@ -1,7 +1,7 @@
 import tkinter as tk
 from .funcoesAuxiliares.desfazerRefazer import desfazerRefazer
 from .funcoesAuxiliares.mascarar import mascarar
-from .selecionarArquivoPdf import selecionarArquivoPdf
+from .funcoesAuxiliares.selecionarArquivoPdf import selecionarArquivoPdf
 from .selecionarPastaDestino import selecionarPastaDestino
 from .funcoesAuxiliares.ativarCpf import ativarCpf
 from .funcoesAuxiliares.ativarRg import ativarRg
@@ -14,9 +14,6 @@ def create_gui(app):
 
     app.cpfAtivo = True
     app.rgAtivo = True
-
-    def selecionarPdf():
-        selecionarArquivoPdf(app)
 
     def selecionarDestino():
         selecionarPastaDestino(app)
@@ -49,7 +46,7 @@ def create_gui(app):
     entradaArquivoPdf = tk.Entry(app, width=40)
     entradaArquivoPdf.grid(row=3, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    botaoArquivoPdf = tk.Button(app, text="Selecionar", command=selecionarPdf)
+    botaoArquivoPdf = tk.Button(app, text="Selecionar", command=lambda:selecionarArquivoPdf(app))
     botaoArquivoPdf.grid(row=3, column=3, pady=5)
 
     rotuloPastaDestino = tk.Label(app, text="Pasta de destino:")
