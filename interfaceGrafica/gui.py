@@ -2,7 +2,7 @@ import tkinter as tk
 from .funcoesAuxiliares.desfazerRefazer import desfazerRefazer
 from .funcoesAuxiliares.mascarar import mascarar
 from .funcoesAuxiliares.selecionarArquivoPdf import selecionarArquivoPdf
-from .selecionarPastaDestino import selecionarPastaDestino
+from .funcoesAuxiliares.selecionarPastaDestino import selecionarPastaDestino
 from .funcoesAuxiliares.ativarCpf import ativarCpf
 from .funcoesAuxiliares.ativarRg import ativarRg
 from .funcoesAuxiliares.limparCampos import limparCampos
@@ -14,9 +14,6 @@ def create_gui(app):
 
     app.cpfAtivo = True
     app.rgAtivo = True
-
-    def selecionarDestino():
-        selecionarPastaDestino(app)
 
     rotuloTitulo = tk.Label(app, text="Mascarar LGPD")
     rotuloTitulo.grid(row=0, column=0, columnspan=4, pady=(10, 5))
@@ -54,7 +51,7 @@ def create_gui(app):
     entradaPastaDestino = tk.Entry(app, width=40)
     entradaPastaDestino.grid(row=4, column=1, columnspan=2, sticky="ew", padx=10, pady=5)
 
-    botaoPastaDestino = tk.Button(app, text="Selecionar", command=selecionarDestino)
+    botaoPastaDestino = tk.Button(app, text="Selecionar", command=lambda:selecionarPastaDestino(app))
     botaoPastaDestino.grid(row=4, column=3, pady=5)
 
     botaoMascarar = tk.Button(app, text="Mascarar", command=lambda:mascarar(app, app.caminhoArquivoPdf, app.pastaDestino, app.cpfAtivo, app.rgAtivo), width=10)
