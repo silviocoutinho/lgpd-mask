@@ -1,0 +1,8 @@
+"Nome da Melhoria","Descrição","Responsável","Data de Início","Data de Conclusão","Status","Resolvido","Notas/Comentários"
+"Refatoração da função `ativarCpf`","Refatorar a função `ativarCpf` para melhorar a legibilidade e manutenibilidade do código.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
+"Refatoração da função `ativarRg`","Refatorar a função `ativarRg` para melhorar a legibilidade e manutenibilidade do código.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
+"Refatoração da função `desfazerRefazer`","Refatorar a classe `desfazerRefazer` para melhorar a legibilidade e manutenibilidade do código.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
+"Refatoração da função `limparCampos`","Refatorar a função `limparCampos` para melhorar a legibilidade e manutenibilidade do código.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
+"Refatoração da função `mascarar`","Refatorar a função `mascarar` para melhorar a legibilidade e manutenibilidade do código.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
+"Melhoria da função `selecionarArquivoPdf`","Melhorar a função `selecionarArquivoPdf` para torná-la mais eficiente e manutenível.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
+"Melhoria da função `selecionarPastaDestino`","Melhorar a função `selecionarPastaDestino` para torná-la mais eficiente e manutenível.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
