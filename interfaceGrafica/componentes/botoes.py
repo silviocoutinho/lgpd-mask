@@ -1,9 +1,7 @@
 import tkinter as tk 
 
-def criarBotoes(app, botoes):
-    criados = []
-    for config in botoes:
-        botao = tk.Button(app, text=config['text'], command=config['command'], width=config['width'])
-        botao.grid(row=config['row'], column=config['column'], sticky=config['sticky'], padx=config['padx'], pady=config['pady'])
-        criados.append(botao)
-    return criados
+def criarBotoes(app, texto, comando, width, row, column, sticky='ew', padx=0, pady=0):
+    botoes = tk.Button(app, text=texto, command=comando, width=width)
+    botoes.grid(row=row, column=column, sticky=sticky, padx=padx, pady=pady)
+
+    return botoes

@@ -1,4 +1,5 @@
 "Nome da Melhoria","Descrição","Responsável","Data de Início","Data de Conclusão","Status","Resolvido","Notas/Comentários"
+"Refatoração da função `criarBotao`","Refatorar a função `criarBotao` para melhorar a legibilidade e manutenibilidade do código.","Nilson",30/10/23,30/10/23,"Concluído","Sim","Refatoracao: Otimizei a interacao dos botoes"
 "Refatoração da função `ativarCpf`","Refatorar a função `ativarCpf` para melhorar a legibilidade e manutenibilidade do código.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
 "Refatoração da função `ativarRg`","Refatorar a função `ativarRg` para melhorar a legibilidade e manutenibilidade do código.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
 "Refatoração da função `desfazerRefazer`","Refatorar a classe `desfazerRefazer` para melhorar a legibilidade e manutenibilidade do código.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"

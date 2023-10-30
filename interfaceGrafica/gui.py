@@ -39,13 +39,9 @@ def create_gui(app):
     entradaPastaDestino = criarCampoTexto(app, 40, 4, 1)
     desfazerRefazer(entradaPastaDestino)
 
-    botoes = [
-        {"text": "Selecionar", "command": lambda: selecionarArquivoPdf(app), "width": 10, "row": 3, "column": 2, "sticky": "e", "padx": 5, "pady": 5},
-        {"text": "Selecionar", "command": lambda: selecionarPastaDestino(app), "width": 10, "row": 4, "column": 2, "sticky": "e", "padx": 5, "pady": 5},
-        {"text": "Mascarar", "command": lambda: mascarar(app, app.caminhoArquivoPdf, app.pastaDestino, app.cpfAtivo, app.rgAtivo), "width": 10, "row": 5, "column": 1, "sticky": "e", "padx": 10, "pady": 5},
-        {"text": "Limpar", "command": lambda: limparCampos(entradaCpf, entradaRg, entradaArquivoPdf, entradaPastaDestino), "width": 10, "row": 5, "column": 2, "sticky": "e", "padx": 5, "pady": 5}
-    ]
-
-    criarBotoes(app, botoes)
+    selecionarPdfBtn = criarBotoes(app, "Selecionar", lambda: selecionarArquivoPdf(app), 10, 3, 2, "e", 5, 5)
+    selecionarDestinoBtn = criarBotoes(app, "Selecionar", lambda: selecionarPastaDestino(app), 10, 4, 2, "e", 5, 5)
+    mascararBtn = criarBotoes(app, "Mascarar", lambda: mascarar(app, app.caminhoArquivoPdf, app.pastaDestino, app.cpfAtivo, app.rgAtivo), 10, 5, 1, "e", 10, 5)
+    limparBtn = criarBotoes(app, "Limpar", lambda: limparCampos(entradaCpf, entradaRg, entradaArquivoPdf, entradaPastaDestino), 10, 5, 2, "e", 5, 5)
 
     app.mainloop()
