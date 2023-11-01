@@ -3,8 +3,7 @@ from .funcoesAuxiliares.mascarar import mascarar
 from .funcoesAuxiliares.desfazerRefazer import desfazerRefazer
 from .funcoesAuxiliares.selecionarArquivoPdf import selecionarArquivoPdf
 from .funcoesAuxiliares.selecionarPastaDestino import selecionarPastaDestino
-from .funcoesAuxiliares.ativarCpf import ativarCpf
-from .funcoesAuxiliares.ativarRg import ativarRg
+from .funcoesAuxiliares.ativarCampo import ativarCampo
 from .funcoesAuxiliares.limparCampos import limparCampos
 from .componentes.rotulo import criarRotulo
 from .componentes.campoTexto import criarCampoTexto
@@ -23,12 +22,12 @@ def create_gui(app):
 
     criarRotulo(app, "CPF:", 1, 0)
     entradaCpf = criarCampoTexto(app, 40, 1, 1)
-    criarCheckBox(app, "Ativo", 1, 2, lambda: ativarCpf(app, entradaCpf))
+    criarCheckBox(app, "Ativo", 1, 2, lambda: ativarCampo(app, "CPF", entradaCpf))
     desfazerRefazer(entradaCpf)
 
     criarRotulo(app, "RG:", 2, 0)
     entradaRg = criarCampoTexto(app, 40, 2, 1)
-    criarCheckBox(app, "Ativo", 2, 2, lambda: ativarRg(app, entradaRg))
+    criarCheckBox(app, "Ativo", 2, 2, lambda: ativarCampo(app, "RG", entradaRg))
     desfazerRefazer(entradaRg)
 
     criarRotulo(app, "Arquivo PDF:", 3, 0)
