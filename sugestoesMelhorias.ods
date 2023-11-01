@@ -5,5 +5,5 @@
 "Refatoração da função `desfazerRefazer`","Refatorar a classe `desfazerRefazer` para melhorar a legibilidade e manutenibilidade do código.","Nilson",01/11/23,01/11/23,"Concluído","Sim","Refatoracao: Melhorias na classe desfazerRefazer"
 "Refatoração da função `limparCampos`","Refatorar a função `limparCampos` para melhorar a legibilidade e manutenibilidade do código.","Nilson",01/11/23,01/11/23,"Concluído","Sim","Refatoracao: Melhorias na funcao de limparCampos"
 "Refatoração da função `mascarar`","Refatorar a função `mascarar` para melhorar a legibilidade e manutenibilidade do código.","Nilson",01/11/23,01/11/23,"Concluído","Sim","Refatoracao: Melhorias na funcao de mascarar"
-"Melhoria da função `selecionarArquivoPdf`","Melhorar a função `selecionarArquivoPdf` para torná-la mais eficiente e manutenível.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
+"Melhoria da função `selecionarArquivoPdf`","Melhorar a função `selecionarArquivoPdf` para torná-la mais eficiente e manutenível.","Nilson",01/11/23,01/11/23,"Concluído","Sim","Refatoracao: Melhorias na funcao de selecionarArquivoPdf"
 "Melhoria da função `selecionarPastaDestino`","Melhorar a função `selecionarPastaDestino` para torná-la mais eficiente e manutenível.","Nilson","[Data de Início]","[Data de Conclusão]","Em Progresso","Não","-"
