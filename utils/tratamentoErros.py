@@ -6,3 +6,6 @@ def mostrarErro(mensagem):
 
 def mostrarAviso(mensagem):
     messagebox.showwarning("Aviso", mensagem)
+
+def mostrarInfo(mensagem):
+    messagebox.showinfo("Informação", mensagem)
