@@ -1,4 +1,4 @@
-import tkinter as tk
+from utils.imports import tk
 
 def criarCheckBox(app, texto, row, column, comando=None):
     checkBox = tk.Checkbutton(app, text=texto, command=comando)
