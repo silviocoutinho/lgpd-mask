@@ -1,4 +1,4 @@
-import tkinter as tk
+from utils.imports import tk
 
 def ativarCampo(app, campo, entrada):
     if campo == "CPF":
