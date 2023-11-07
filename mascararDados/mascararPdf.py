@@ -1,7 +1,4 @@
-import tkinter as tk
-import fitz
-import os
-import re
+from utils.imports import tk, re, fitz, os
 from .mascararCpf import removerCpf
 from .mascararRg import removerRg
 from utils.tratamentoErros import mostrarErro, mostrarInfo, mostrarAviso
