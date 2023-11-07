@@ -1,6 +1,4 @@
-import tkinter as tk
-import interfaceGrafica.gui as gui
-from utils.tratamentoErros import mostrarErro
+from utils.imports import tk, gui, mostrarErro
 
 try:
     if __name__ == "__main__":
