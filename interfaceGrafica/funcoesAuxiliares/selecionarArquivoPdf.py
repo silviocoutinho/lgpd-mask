@@ -1,5 +1,4 @@
-import tkinter as tk
-from tkinter import filedialog
+from utils.imports import tk, filedialog
 from utils.tratamentoErros import mostrarErro, mostrarAviso
 
 def selecionarArquivoPdf(app):
