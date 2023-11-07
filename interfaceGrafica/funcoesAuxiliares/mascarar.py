@@ -1,5 +1,5 @@
+from utils.imports import mascararPdf
 import os.path
-import mascararDados.mascararPdf as mascararPdf
 from utils.tratamentoErros import mostrarErro, mostrarAviso, mostrarInfo
 
 def mascarar(app, caminhoArquivo, destino, cpfAtivo, rgAtivo):
