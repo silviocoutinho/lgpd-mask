@@ -1,4 +1,3 @@
-import tkinter as tk
 from .funcoesAuxiliares.mascarar import mascarar
 from .funcoesAuxiliares.desfazerRefazer import desfazerRefazer
 from .funcoesAuxiliares.selecionarArquivoPdf import selecionarArquivoPdf
