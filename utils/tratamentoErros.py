@@ -1,5 +1,4 @@
-import tkinter as tk
-from tkinter import messagebox
+from utils.imports import messagebox
 
 def mostrarErro(mensagem):
     messagebox.showerror("Erro", mensagem)
