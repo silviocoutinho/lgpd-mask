@@ -1,5 +1,4 @@
 import os.path
-from tkinter import messagebox
 import mascararDados.mascararPdf as mascararPdf
 from utils.tratamentoErros import mostrarErro, mostrarAviso, mostrarInfo
 
@@ -20,6 +19,7 @@ def mascarar(app, caminhoArquivo, destino, cpfAtivo, rgAtivo):
 
     try:
         resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, entradaRg)
+
         if resultado:
             mostrarInfo(resultado)
     except Exception as e:
