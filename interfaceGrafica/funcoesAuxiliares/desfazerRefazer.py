@@ -1,4 +1,4 @@
-import tkinter as tk
+from utils.imports import tk
 
 class desfazerRefazer:
     def __init__(self, entrada):
