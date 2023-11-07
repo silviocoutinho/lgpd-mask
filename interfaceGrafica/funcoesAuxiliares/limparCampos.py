@@ -1,4 +1,4 @@
-import tkinter as tk
+from utils.imports import tk
 
 def limparCampos(*campos):
     for campo in campos:
