@@ -4,6 +4,7 @@ import os
 import re
 from .mascararCpf import removerCpf
 from .mascararRg import removerRg
+from utils.tratamentoErros import mostrarErro, mostrarInfo, mostrarAviso
 
 def mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, entradaRg):
 
@@ -22,21 +23,21 @@ def mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, en
 
             if cpfAtivo and removerCpf(pagina, cpfLimpo):
                 achouCpf = True
-                mensagem.append("CPF encontrado com sucesso.")   
+                mostrarInfo("CPF encontrado com sucesso.")   
 
             if rgAtivo and removerRg(pagina, rgLimpo):
                 achouRg = True
-                mensagem.append("RG encontrado com sucesso.")    
+                mostrarInfo("RG encontrado com sucesso.")    
 
         if achouCpf:
             entradaCpf.delete(0, tk.END)
         else:
-            mensagem.append("CPF não foi encontrado.")
+            mostrarAviso("CPF não foi encontrado.")
 
         if achouRg:
             entradaRg.delete(0, tk.END)
         else:
-            mensagem.append("RG não foi encontrado.")    
+            mostrarAviso("RG não foi encontrado.")    
 
         if achouCpf or achouRg:
             arquivoDestino = os.path.basename(caminhoArquivo)
@@ -47,5 +48,4 @@ def mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, en
             return "\n".join(mensagem)
     
     except Exception as e:
-        print(f"Erro ao processar o arquivo PDF: {e}")
-        return "Ocorreu um erro ao processar o arquivo PDF."
+        mostrarErro(f"Ocorreu um erro inesperado: {e}")
