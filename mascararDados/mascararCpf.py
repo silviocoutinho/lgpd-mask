@@ -1,4 +1,4 @@
-import re
+from utils.imports import re
 from utils.tratamentoErros import mostrarErro
 
 def removerCpf(pagina, cpfLimpo):
