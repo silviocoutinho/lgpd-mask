@@ -1,4 +1,4 @@
-import tkinter as tk
+from utils.imports import tk
 
 def criarCampoTexto(app, width, row, column):
     campoTexto = tk.Entry(app, width=width)
