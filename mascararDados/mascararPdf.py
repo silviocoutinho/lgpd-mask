@@ -1,7 +1,7 @@
 from utils.imports import tk, re, fitz, os
 from .mascararCpf import removerCpf
 from .mascararRg import removerRg
-from utils.tratamentoErros import mostrarErro, mostrarInfo, mostrarAviso
+from utils.tratamentoErros import mostrarEncontrado, mostrarNaoEncontrado, mostrarErroInesperado
 
 def mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, entradaRg):
 
@@ -20,21 +20,21 @@ def mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, en
 
             if cpfAtivo and removerCpf(pagina, cpfLimpo):
                 achouCpf = True
-                mostrarInfo("CPF encontrado com sucesso.")   
+                mostrarEncontrado("CPF")   
 
             if rgAtivo and removerRg(pagina, rgLimpo):
                 achouRg = True
-                mostrarInfo("RG encontrado com sucesso.")    
+                mostrarEncontrado("RG")    
 
         if achouCpf:
             entradaCpf.delete(0, tk.END)
         else:
-            mostrarAviso("CPF não foi encontrado.")
+            mostrarNaoEncontrado("CPF")
 
         if achouRg:
             entradaRg.delete(0, tk.END)
         else:
-            mostrarAviso("RG não foi encontrado.")    
+            mostrarNaoEncontrado("RG")    
 
         if achouCpf or achouRg:
             arquivoDestino = os.path.basename(caminhoArquivo)
@@ -45,4 +45,4 @@ def mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, en
             return "\n".join(mensagem)
     
     except Exception as e:
-        mostrarErro(f"Ocorreu um erro inesperado: {e}")
+        mostrarErroInesperado(e)
