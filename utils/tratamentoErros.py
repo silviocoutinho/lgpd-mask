@@ -1,5 +1,5 @@
 from utils.imports import tk
-from .mensagens import erroInesperado, erroSelecaoDestino, erroSelecaoArquivo, arquivoInvalido, arquivoNaoExiste, selecioneCampo, encontrado, naoEncontrado
+from utils.mensagens import erroInesperado, erroSelecaoDestino, erroSelecaoArquivo, arquivoInvalido, arquivoNaoExiste, selecioneCampo, encontrado, naoEncontrado, erroAoProcessar, sucessoAoProcessar
 
 def mostrarErroInesperado(e):
     tk.messagebox.showerror("Erro Inesperado", erroInesperado(e))
@@ -9,6 +9,12 @@ def mostrarErroSelecaoDestino(e):
 
 def mostrarErroSelecaoArquivo(e):
     tk.messagebox.showerror("Erro na Seleção do Arquivo", erroSelecaoArquivo(e))
+
+def mostrarErroAoProcessar(e):
+    tk.messagebox.showerror("Erro ao Processar", erroAoProcessar(e))
+
+def mostrarSucessoAoProcessar(e):
+    tk.messagebox.showerror("Sucesso ao Processar", sucessoAoProcessar())
 
 def mostrarArquivoInvalido():
     tk.messagebox.showinfo("Arquivo Inválido", arquivoInvalido())
