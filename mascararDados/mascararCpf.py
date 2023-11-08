@@ -1,5 +1,5 @@
 from utils.imports import re
-from utils.tratamentoErros import mostrarErro
+from utils.tratamentoErros import mostrarErroInesperado
 
 def removerCpf(pagina, cpfLimpo):
     try:
@@ -24,5 +24,5 @@ def removerCpf(pagina, cpfLimpo):
                     pagina.apply_redactions()
                 return True
     except Exception as e:
-        mostrarErro(f"Ocorreu um erro inesperado: {e}")
+        mostrarErroInesperado(e)
     return False    
