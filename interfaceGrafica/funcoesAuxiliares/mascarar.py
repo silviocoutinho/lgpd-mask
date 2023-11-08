@@ -1,6 +1,6 @@
 from utils.imports import mascararPdf
 import os.path
-from utils.tratamentoErros import mostrarErro, mostrarAviso, mostrarInfo
+from utils.tratamentoErros import mostrarSelecaoCampo, mostrarArquivoInexistente, mostrarErroAoProcessar, mostrarSucessoAoProcessar
 
 def mascarar(app, caminhoArquivo, destino, cpfAtivo, rgAtivo):
     
@@ -10,17 +10,17 @@ def mascarar(app, caminhoArquivo, destino, cpfAtivo, rgAtivo):
     cpf, rg = entradaCpf.get(), entradaRg.get()
 
     if not (cpfAtivo or rgAtivo):
-        mostrarAviso("Por favor, selecione pelo menos CPF ou RG.")
+        mostrarSelecaoCampo("CPF ou RG")
         return  
 
     if not os.path.isfile(caminhoArquivo):
-        mostrarAviso("O arquivo selecionado não existe.")
+        mostrarArquivoInexistente()
         return
 
     try:
         resultado = mascararPdf.mascarar(caminhoArquivo, destino, cpfAtivo, rgAtivo, cpf, rg, entradaCpf, entradaRg)
 
         if resultado:
-            mostrarInfo(resultado)
+            mostrarSucessoAoProcessar(resultado)
     except Exception as e:
-        mostrarErro(f"Ocorreu um erro ao processar o arquivo PDF: {e}")
+        mostrarErroAoProcessar(e)
