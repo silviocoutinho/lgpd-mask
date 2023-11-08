@@ -14,7 +14,6 @@ def erroSelecaoDestino(e):
 def erroSelecaoArquivo(e):
     return f"Ocorreu um erro durante a seleção do arquivo: {e}"
 
-
 # Mensagens gerais
 
 def selecioneCampo(campo):
@@ -23,8 +22,11 @@ def selecioneCampo(campo):
 def arquivoNaoExiste():
     return "O arquivo selecionado não existe."
 
-def erroProcessarPdf(e):
+def erroAoProcessar(e):
     return f"Ocorreu um erro ao processar o arquivo PDF: {e}"
+
+def sucessoAoProcessar():
+    return "O arquivo foi mascarado com sucesso."
 
 def arquivoInvalido():
     return "Por favor, selecione um arquivo PDF válido."
