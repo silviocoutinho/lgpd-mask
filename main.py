@@ -1,5 +1,5 @@
-from utils.imports import tk, gui, mostrarErro
-import os
+from utils.imports import tk, gui, os
+from utils.tratamentoErros import mostrarErroInesperado
 from dotenv import load_dotenv
 
 # Carrega as variáveis de ambiente do arquivo .env
@@ -19,4 +19,4 @@ try:
 
         app.mainloop()
 except Exception as e:
-    mostrarErro(f"Ocorreu um erro inesperado: {e}")
+    mostrarErroInesperado(e)
