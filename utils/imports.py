@@ -6,7 +6,6 @@ import fitz
 from tkinter import messagebox, filedialog
 from mascararDados import mascararPdf
 from interfaceGrafica import gui
-from .tratamentoErros import mostrarErro, mostrarAviso, mostrarInfo
 from mascararDados.mascararCpf import removerCpf
 from mascararDados.mascararRg import removerRg
 from interfaceGrafica.funcoesAuxiliares.mascarar import mascarar
