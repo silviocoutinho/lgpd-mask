@@ -64,6 +64,11 @@ Você pode personalizar este aplicativo de acordo com suas necessidades, incluin
 
 Contribuições são bem-vindas! Sinta-se à vontade para melhorar este aplicativo e enviar solicitações de pull com novos recursos ou correções de bugs.
 
------------------------------------------------------------
+## Sobre o Desenvolvedor
 
-Feito por 🚀 NN 🚀
+Este aplicativo foi desenvolvido por Nilson Jr.
+
+Para conhecer mais sobre meu trabalho e explorar outros projetos, convido você a visitar meu perfil profissional nos seguintes links:
+
+- [LinkedIn](https://bit.ly/nilsonjr_linkedin)
+- [GitHub](https://bit.ly/nilsonjr_github)
